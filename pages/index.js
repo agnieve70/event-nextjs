@@ -1,9 +1,8 @@
 import React from 'react';
 import EventList from '../components/events/event-list';
-import { getFeaturedEvents } from '../helpers/api-utils';
 import NewsletterRegistration from "../components/input/newsletter-registration";
 import Head from 'next/head';
-
+import {events} from '../data/event';
 
 function HomePage({events}) {
 
@@ -23,7 +22,7 @@ function HomePage({events}) {
 }
 
 export async function getStaticProps(){
-  const featuredEvents = await getFeaturedEvents();
+  const featuredEvents = events.filter((event) => event.isFeatured);
   return {
     props: {
       events: featuredEvents
