@@ -36,7 +36,7 @@ function Comments(props) {
 
     notificationCtx.showNotification({
       title: "Commenting.",
-      message: "Addign new comment.",
+      message: "Adding new comment.",
       status: "pending",
     });
     
