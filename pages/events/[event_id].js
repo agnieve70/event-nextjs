@@ -4,6 +4,7 @@ import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 import Comments from "../../components/input/comments";
+import {events} from '/data/event';
 
 
 function EventDetailsPage({selectedEvent}) {
@@ -37,7 +38,8 @@ function EventDetailsPage({selectedEvent}) {
 export async function getStaticProps(context) {
   const eventId = context.params.event_id;
 
-  const event = await getEventById(eventId);
+  const event = events.find((event) => event.id === parseInt(eventId));
+ 
 
   return {
     props: {
@@ -49,8 +51,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-    const events = await getFeaturedEvents();
-    const paths = events.map((event) => ({ params: { event_id: event.id } }));
+    const paths = events.map((event) => ({ params: { event_id: event.id+"" } }));
   return {
     paths: paths,
     fallback: 'blocking'

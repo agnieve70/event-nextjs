@@ -4,44 +4,25 @@ import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/button';
 import ErrorAlert from "../../components/ui/error-alert";
-import useSWR from 'swr';
+import {events} from '../../data/event';
 
 function FilterEventsPage() {
   const [loadedEvents, setLoadedEvents] = useState();
   const router = useRouter();
-  const filterData = router.query.slug;
   
-  const fetcher = (url) => fetch(url).then((r) => r.json());
-  const {data, error} = useSWR(
-    "https://event-app-60621-default-rtdb.asia-southeast1.firebasedatabase.app/events.json", fetcher
-  );
- 
-
-  console.log("DATA", data);
-  // console.log("ERROR", error);
+  const filterData = router.query.slug;
 
   useEffect(() => {
-    if(data){
-      console.log("naay sulod ang data: ", data);
-       const events = [];
+    setLoadedEvents(events);
 
-       for (const key in data) {
-         events.push({
-           id: key,
-           ...data[key],
-         });
-       }
-
-       setLoadedEvents(events);
-    }
-  }, [data]);
+  }, []);
 
   if(!loadedEvents){
     return <p className='center'>Loading . .  .</p>
   }
 
-  const filteredYear = filterData[0];
-  const filteredMonth = filterData[1];
+  const filteredYear = filterData? filterData[0] : 2022;
+  const filteredMonth = filterData ? filterData[1] : 1;
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
@@ -59,8 +40,8 @@ function FilterEventsPage() {
     numYear > 2030 ||
     numYear < 2021 ||
     numMonth < 1 ||
-    numMonth > 12 ||
-    error
+    numMonth > 12 
+    
    ) {
     return (
       <Fragment>

@@ -1,19 +1,21 @@
 export async function getAllEvents() {
   const response = await fetch(
-    "https://event-app-60621-default-rtdb.asia-southeast1.firebasedatabase.app/events.json"
+    "http://localhost:3000/event.json"
   );
   const data = await response.json();
 
-  const events = [];
+  // const events = [];
 
-  for (const key in data) {
-    events.push({
-      id: key,
-      ...data[key],
-    });
-  }
+  // for (const key in data) {
+  //   events.push({
+  //     id: key,
+  //     ...data[key],
+  //   });
+  // }
 
-  return events;
+  console.log(data)
+
+  return data.events;
 }
 
 export async function getFeaturedEvents() {

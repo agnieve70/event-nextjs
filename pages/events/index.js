@@ -3,6 +3,7 @@ import { getAllEvents } from '../../helpers/api-utils';
 import EventList from "../../components/events/event-list";
 import EventsSearch from "../../components/events/events-search";
 import { useRouter } from 'next/router';
+import {events} from '/data/event';
 
 function AllEventsPage({events}) {
   const router = useRouter();
@@ -21,7 +22,7 @@ function AllEventsPage({events}) {
 }
 
 export async function getStaticProps() {
-  const allEvents = await getAllEvents();
+  const allEvents = events;
   return {
     props: {
       events: allEvents,
