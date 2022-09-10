@@ -3,7 +3,7 @@ const { MongoClient } = require("mongodb");
 
 export async function connectDatabase() {
   const client = await MongoClient.connect(
-    "mongodb+srv://agnieve0513:JaOUg9KbzOqjmd1l@cluster0.h7lt8.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://agnieve0513:Evien05131997@cluster0.h7lt8.mongodb.net/?retryWrites=true&w=majority"
   );
   return client;
 }
